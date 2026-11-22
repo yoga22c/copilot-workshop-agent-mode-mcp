@@ -2,6 +2,7 @@
   color-scheme: light;
   --color-page: #f4f6fb;
   --color-card: #ffffff;
+  --color-card-border: rgb(255 255 255 / 80%);
   --color-text: #20283a;
   --color-muted: #8790a3;
   --color-accent: #6558d3;
@@ -9,7 +10,58 @@
   --color-border: #e9ebf2;
   --color-complete: #a6adbb;
   --color-danger: #c65e68;
+  --color-input: #fafbfe;
+  --color-input-placeholder: #a6adbb;
+  --color-item: #ffffff;
+  --color-delete-hover: #fff0f1;
+  --color-footer-note: #adb3c0;
   --shadow-card: 0 22px 60px rgb(34 43 75 / 10%), 0 3px 12px rgb(34 43 75 / 5%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-page: #171923;
+    --color-card: #222532;
+    --color-card-border: rgb(255 255 255 / 8%);
+    --color-text: #edf0f7;
+    --color-muted: #a3aabd;
+    --color-accent: #a69bff;
+    --color-accent-hover: #b7afff;
+    --color-border: #3a3e4d;
+    --color-complete: #858da0;
+    --color-danger: #ff9aa3;
+    --color-input: #292d3b;
+    --color-input-placeholder: #858da0;
+    --color-item: #292d3b;
+    --color-delete-hover: #493039;
+    --color-footer-note: #858da0;
+    --shadow-card: 0 22px 60px rgb(0 0 0 / 28%), 0 3px 12px rgb(0 0 0 / 16%);
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-page: #171923;
+  --color-card: #222532;
+  --color-card-border: rgb(255 255 255 / 8%);
+  --color-text: #edf0f7;
+  --color-muted: #a3aabd;
+  --color-accent: #a69bff;
+  --color-accent-hover: #b7afff;
+  --color-border: #3a3e4d;
+  --color-complete: #858da0;
+  --color-danger: #ff9aa3;
+  --color-input: #292d3b;
+  --color-input-placeholder: #858da0;
+  --color-item: #292d3b;
+  --color-delete-hover: #493039;
+  --color-footer-note: #858da0;
+  --shadow-card: 0 22px 60px rgb(0 0 0 / 28%), 0 3px 12px rgb(0 0 0 / 16%);
 }
 
 * {
@@ -38,7 +90,7 @@ input {
   width: min(100%, 520px);
   padding: 38px 40px 24px;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 80%);
+  border: 1px solid var(--color-card-border);
   border-radius: 24px;
   background: var(--color-card);
   box-shadow: var(--shadow-card);
@@ -46,6 +98,31 @@ input {
 
 .card-header {
   margin-bottom: 28px;
+}
+
+.heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-card);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-accent);
 }
 
 .eyebrow {
@@ -83,13 +160,13 @@ h1 {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   outline: none;
-  background: #fafbfe;
+  background: var(--color-input);
   color: var(--color-text);
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .todo-form input::placeholder {
-  color: #a6adbb;
+  color: var(--color-input-placeholder);
 }
 
 .todo-form input:focus {
@@ -126,6 +203,34 @@ h1 {
   line-height: 1;
 }
 
+.filter-controls {
+  display: flex;
+  gap: 8px;
+  margin: -10px 0 18px;
+}
+
+.filter-button {
+  padding: 7px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-card);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.filter-button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filter-button.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+}
+
 .list-section {
   min-height: 76px;
 }
@@ -146,7 +251,7 @@ h1 {
   padding: 9px 10px 9px 14px;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: #fff;
+  background: var(--color-item);
   animation: appear 180ms ease-out;
 }
 
@@ -184,7 +289,7 @@ h1 {
 }
 
 .delete-button:hover {
-  background: #fff0f1;
+  background: var(--color-delete-hover);
   color: var(--color-danger);
 }
 
@@ -213,7 +318,7 @@ h1 {
 }
 
 .footer-note {
-  color: #adb3c0;
+  color: var(--color-footer-note);
   font-size: 0.78rem;
 }
 
@@ -252,6 +357,16 @@ h1 {
 
   .todo-form {
     gap: 8px;
+  }
+
+  .heading-row {
+    align-items: flex-start;
+  }
+
+  .theme-toggle {
+    gap: 4px;
+    padding: 7px 8px;
+    font-size: 0.72rem;
   }
 
   .add-button {

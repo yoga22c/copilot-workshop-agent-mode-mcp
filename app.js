@@ -104,7 +104,7 @@ function renderTodos() {
     emptyState.textContent = currentFilter === "active"
       ? "沒有未完成的待辦事項。"
       : currentFilter === "completed"
-        ? "還沒有已完成的待辦事項。"
+        ? "目前沒有已完成的待辦事項；清單會依篩選條件顯示，其他項目並未刪除。"
         : "還沒有任何待辦事項，新增一個吧！";
   }
 }
